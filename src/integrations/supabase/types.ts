@@ -583,6 +583,20 @@ export type Database = {
         Args: never
         Returns: Database["public"]["Enums"]["user_role"]
       }
+      create_public_booking: {
+        Args: {
+          _id_number?: string
+          _passenger_name: string
+          _passenger_phone: string
+          _seat_number: string
+          _trip_id: string
+        }
+        Returns: {
+          booking_id: string
+          booking_ref: string
+          fare: number
+        }[]
+      }
       expire_pending_bookings: { Args: never; Returns: undefined }
       get_taken_seats: {
         Args: { _trip_id: string }
@@ -599,6 +613,34 @@ export type Database = {
       }
       is_main_admin: { Args: never; Returns: boolean }
       is_staff_admin: { Args: { _user_id: string }; Returns: boolean }
+      track_booking: {
+        Args: { _booking_ref: string; _phone: string }
+        Returns: {
+          booking_ref: string
+          bus_plate: string
+          created_at: string
+          departure_time: string
+          destination: string
+          fare_amount: number
+          mpesa_receipt: string
+          origin: string
+          passenger_name: string
+          payment_status: string
+          seat_number: string
+        }[]
+      }
+      track_parcel: {
+        Args: { _access_password: string; _tracking_code: string }
+        Returns: {
+          created_at: string
+          destination: string
+          origin: string
+          payment_status: string
+          status: string
+          tracking_code: string
+          updated_at: string
+        }[]
+      }
     }
     Enums: {
       app_role:
