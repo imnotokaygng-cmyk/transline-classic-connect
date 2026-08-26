@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { formatKes } from "@/config/site";
 
 export const Route = createFileRoute("/track-parcel")({
   head: () => ({
@@ -56,8 +55,8 @@ function TrackParcelPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!code.trim()) return toast.error("Enter your tracking code.");
-    if (!password.trim()) return toast.error("Enter your access password.");
+    if (!code.trim()) { toast.error("Enter your tracking code."); return; }
+    if (!password.trim()) { toast.error("Enter your access password."); return; }
     lookup.mutate();
   }
 

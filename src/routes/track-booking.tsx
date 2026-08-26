@@ -58,8 +58,8 @@ function TrackBookingPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!ref.trim()) return toast.error("Enter your booking reference.");
-    if (phone.replace(/\D/g, "").length < 9) return toast.error("Enter the phone number used for booking.");
+    if (!ref.trim()) { toast.error("Enter your booking reference."); return; }
+    if (phone.replace(/\D/g, "").length < 9) { toast.error("Enter the phone number used for booking."); return; }
     lookup.mutate();
   }
 
