@@ -24,15 +24,11 @@ export const Route = createFileRoute("/track-parcel")({
 interface ParcelResult {
   tracking_code: string;
   status: string | null;
-  sender_name: string;
-  receiver_name: string;
-  receiver_phone: string;
   origin: string | null;
   destination: string | null;
-  weight_kg: number | null;
-  fare_amount: number;
   payment_status: string | null;
   created_at: string;
+  updated_at: string;
 }
 
 function TrackParcelPage() {
