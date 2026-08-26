@@ -34,7 +34,7 @@ export const initiateMpesaPayment = createServerFn({ method: "POST" })
       process.env["MPESA_CALLBACK_URL"] ??
       (process.env["VERCEL_URL"] ? `https://${process.env["VERCEL_URL"]}` : null) ??
       process.env["VITE_PUBLIC_URL"] ??
-      "https://transline-classic.vercel.app/api/public/mpesa/callback";
+      "https://transline-classic-connect.vercel.app/api/public/mpesa/callback";
     const base =
       (process.env["MPESA_ENV"] ?? "sandbox") === "production"
         ? "https://api.safaricom.co.ke"
