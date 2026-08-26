@@ -40,9 +40,9 @@ function TrackBookingPage() {
 
   const lookup = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase.rpc("track_public_booking", {
+      const { data, error } = await supabase.rpc("track_booking", {
         _booking_ref: ref,
-        _passenger_phone: phone,
+        _phone: phone,
       });
       if (error) throw error;
       const row = Array.isArray(data) ? data[0] : data;

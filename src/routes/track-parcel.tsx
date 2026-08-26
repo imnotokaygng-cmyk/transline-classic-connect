@@ -42,7 +42,7 @@ function TrackParcelPage() {
 
   const lookup = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase.rpc("track_public_parcel", {
+      const { data, error } = await supabase.rpc("track_parcel", {
         _tracking_code: code,
         _access_password: password,
       });
