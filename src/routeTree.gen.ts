@@ -10,7 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/Contact'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as ParcelRouteImport } from './routes/parcel'
+import { Route as RoutesRouteImport } from './routes/routes'
+import { Route as TrackBookingRouteImport } from './routes/track-booking'
+import { Route as TrackParcelRouteImport } from './routes/track-parcel'
 import { Route as ApiPublicMpesaCallbackRouteImport } from './routes/api/public/mpesa/callback'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +23,34 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/Contact',
+  path: '/Contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookRoute = BookRouteImport.update({
   id: '/book',
   path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParcelRoute = ParcelRouteImport.update({
+  id: '/parcel',
+  path: '/parcel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoutesRoute = RoutesRouteImport.update({
+  id: '/routes',
+  path: '/routes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrackBookingRoute = TrackBookingRouteImport.update({
+  id: '/track-booking',
+  path: '/track-booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrackParcelRoute = TrackParcelRouteImport.update({
+  id: '/track-parcel',
+  path: '/track-parcel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicMpesaCallbackRoute = ApiPublicMpesaCallbackRouteImport.update({
@@ -31,31 +61,76 @@ const ApiPublicMpesaCallbackRoute = ApiPublicMpesaCallbackRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/parcel': typeof ParcelRoute
+  '/routes': typeof RoutesRoute
+  '/track-booking': typeof TrackBookingRoute
+  '/track-parcel': typeof TrackParcelRoute
   '/api/public/mpesa/callback': typeof ApiPublicMpesaCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/parcel': typeof ParcelRoute
+  '/routes': typeof RoutesRoute
+  '/track-booking': typeof TrackBookingRoute
+  '/track-parcel': typeof TrackParcelRoute
   '/api/public/mpesa/callback': typeof ApiPublicMpesaCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/parcel': typeof ParcelRoute
+  '/routes': typeof RoutesRoute
+  '/track-booking': typeof TrackBookingRoute
+  '/track-parcel': typeof TrackParcelRoute
   '/api/public/mpesa/callback': typeof ApiPublicMpesaCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/book' | '/api/public/mpesa/callback'
+  fullPaths:
+    | '/'
+    | '/Contact'
+    | '/book'
+    | '/parcel'
+    | '/routes'
+    | '/track-booking'
+    | '/track-parcel'
+    | '/api/public/mpesa/callback'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/book' | '/api/public/mpesa/callback'
-  id: '__root__' | '/' | '/book' | '/api/public/mpesa/callback'
+  to:
+    | '/'
+    | '/Contact'
+    | '/book'
+    | '/parcel'
+    | '/routes'
+    | '/track-booking'
+    | '/track-parcel'
+    | '/api/public/mpesa/callback'
+  id:
+    | '__root__'
+    | '/'
+    | '/Contact'
+    | '/book'
+    | '/parcel'
+    | '/routes'
+    | '/track-booking'
+    | '/track-parcel'
+    | '/api/public/mpesa/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   BookRoute: typeof BookRoute
+  ParcelRoute: typeof ParcelRoute
+  RoutesRoute: typeof RoutesRoute
+  TrackBookingRoute: typeof TrackBookingRoute
+  TrackParcelRoute: typeof TrackParcelRoute
   ApiPublicMpesaCallbackRoute: typeof ApiPublicMpesaCallbackRoute
 }
 
@@ -68,11 +143,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/Contact': {
+      id: '/Contact'
+      path: '/Contact'
+      fullPath: '/Contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/book': {
       id: '/book'
       path: '/book'
       fullPath: '/book'
       preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parcel': {
+      id: '/parcel'
+      path: '/parcel'
+      fullPath: '/parcel'
+      preLoaderRoute: typeof ParcelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/routes': {
+      id: '/routes'
+      path: '/routes'
+      fullPath: '/routes'
+      preLoaderRoute: typeof RoutesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/track-booking': {
+      id: '/track-booking'
+      path: '/track-booking'
+      fullPath: '/track-booking'
+      preLoaderRoute: typeof TrackBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/track-parcel': {
+      id: '/track-parcel'
+      path: '/track-parcel'
+      fullPath: '/track-parcel'
+      preLoaderRoute: typeof TrackParcelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/mpesa/callback': {
@@ -87,7 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   BookRoute: BookRoute,
+  ParcelRoute: ParcelRoute,
+  RoutesRoute: RoutesRoute,
+  TrackBookingRoute: TrackBookingRoute,
+  TrackParcelRoute: TrackParcelRoute,
   ApiPublicMpesaCallbackRoute: ApiPublicMpesaCallbackRoute,
 }
 export const routeTree = rootRouteImport
