@@ -127,21 +127,16 @@ function TrackParcelPage() {
                 </span>
               </p>
               <p>
-                Sender: <span className="font-semibold">{result.sender_name}</span>
-              </p>
-              <p>
-                Receiver:{" "}
+                Sent on:{" "}
                 <span className="font-semibold">
-                  {result.receiver_name} ({result.receiver_phone})
+                  {new Date(result.created_at).toLocaleString("en-KE")}
                 </span>
               </p>
-              {result.weight_kg ? (
-                <p>
-                  Weight: <span className="font-semibold">{result.weight_kg}kg</span>
-                </p>
-              ) : null}
               <p>
-                Fare: <span className="font-semibold">{formatKes(result.fare_amount)}</span>
+                Last update:{" "}
+                <span className="font-semibold">
+                  {new Date(result.updated_at).toLocaleString("en-KE")}
+                </span>
               </p>
               <p>
                 Payment status:{" "}
