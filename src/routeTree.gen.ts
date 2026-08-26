@@ -10,8 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ContactRouteImport } from './routes/Contact'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ParcelRouteImport } from './routes/parcel'
 import { Route as RoutesRouteImport } from './routes/routes'
 import { Route as TrackBookingRouteImport } from './routes/track-booking'
@@ -23,14 +23,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/Contact',
-  path: '/Contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BookRoute = BookRouteImport.update({
   id: '/book',
   path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParcelRoute = ParcelRouteImport.update({
@@ -61,8 +61,8 @@ const ApiPublicMpesaCallbackRoute = ApiPublicMpesaCallbackRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/parcel': typeof ParcelRoute
   '/routes': typeof RoutesRoute
   '/track-booking': typeof TrackBookingRoute
@@ -71,8 +71,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/parcel': typeof ParcelRoute
   '/routes': typeof RoutesRoute
   '/track-booking': typeof TrackBookingRoute
@@ -82,8 +82,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/Contact': typeof ContactRoute
   '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/parcel': typeof ParcelRoute
   '/routes': typeof RoutesRoute
   '/track-booking': typeof TrackBookingRoute
@@ -94,8 +94,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/Contact'
     | '/book'
+    | '/contact'
     | '/parcel'
     | '/routes'
     | '/track-booking'
@@ -104,8 +104,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/Contact'
     | '/book'
+    | '/contact'
     | '/parcel'
     | '/routes'
     | '/track-booking'
@@ -114,8 +114,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/Contact'
     | '/book'
+    | '/contact'
     | '/parcel'
     | '/routes'
     | '/track-booking'
@@ -125,8 +125,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ContactRoute: typeof ContactRoute
   BookRoute: typeof BookRoute
+  ContactRoute: typeof ContactRoute
   ParcelRoute: typeof ParcelRoute
   RoutesRoute: typeof RoutesRoute
   TrackBookingRoute: typeof TrackBookingRoute
@@ -143,18 +143,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/Contact': {
-      id: '/Contact'
-      path: '/Contact'
-      fullPath: '/Contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/book': {
       id: '/book'
       path: '/book'
       fullPath: '/book'
       preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/parcel': {
@@ -197,8 +197,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ContactRoute: ContactRoute,
   BookRoute: BookRoute,
+  ContactRoute: ContactRoute,
   ParcelRoute: ParcelRoute,
   RoutesRoute: RoutesRoute,
   TrackBookingRoute: TrackBookingRoute,

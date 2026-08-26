@@ -40,9 +40,9 @@ function TrackBookingPage() {
 
   const lookup = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase.rpc("track_public_booking", {
+      const { data, error } = await supabase.rpc("track_booking", {
         _booking_ref: ref,
-        _passenger_phone: phone,
+        _phone: phone,
       });
       if (error) throw error;
       const row = Array.isArray(data) ? data[0] : data;
@@ -58,8 +58,8 @@ function TrackBookingPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!ref.trim()) return toast.error("Enter your booking reference.");
-    if (phone.replace(/\D/g, "").length < 9) return toast.error("Enter the phone number used for booking.");
+    if (!ref.trim()) { toast.error("Enter your booking reference."); return; }
+    if (phone.replace(/\D/g, "").length < 9) { toast.error("Enter the phone number used for booking."); return; }
     lookup.mutate();
   }
 

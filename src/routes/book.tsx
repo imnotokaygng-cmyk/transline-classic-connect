@@ -94,7 +94,7 @@ function BookPage() {
         _seat_number: seat,
         _passenger_name: name,
         _passenger_phone: phone,
-        _id_number: idNumber || undefined,
+        _id_number: idNumber || "",
       });
       if (error) throw error;
       const row = Array.isArray(data) ? data[0] : data;

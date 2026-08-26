@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig, whatsappLink } from "@/config/site";
 
-export const Route = createFileRoute("/Contact")({
+export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Us | Transline Classic" },

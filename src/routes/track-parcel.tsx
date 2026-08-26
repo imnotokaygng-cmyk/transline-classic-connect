@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { formatKes } from "@/config/site";
 
 export const Route = createFileRoute("/track-parcel")({
   head: () => ({
@@ -24,15 +23,11 @@ export const Route = createFileRoute("/track-parcel")({
 interface ParcelResult {
   tracking_code: string;
   status: string | null;
-  sender_name: string;
-  receiver_name: string;
-  receiver_phone: string;
   origin: string | null;
   destination: string | null;
-  weight_kg: number | null;
-  fare_amount: number;
   payment_status: string | null;
   created_at: string;
+  updated_at: string;
 }
 
 function TrackParcelPage() {
@@ -42,7 +37,7 @@ function TrackParcelPage() {
 
   const lookup = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase.rpc("track_public_parcel", {
+      const { data, error } = await supabase.rpc("track_parcel", {
         _tracking_code: code,
         _access_password: password,
       });
@@ -60,8 +55,8 @@ function TrackParcelPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!code.trim()) return toast.error("Enter your tracking code.");
-    if (!password.trim()) return toast.error("Enter your access password.");
+    if (!code.trim()) { toast.error("Enter your tracking code."); return; }
+    if (!password.trim()) { toast.error("Enter your access password."); return; }
     lookup.mutate();
   }
 
@@ -131,21 +126,16 @@ function TrackParcelPage() {
                 </span>
               </p>
               <p>
-                Sender: <span className="font-semibold">{result.sender_name}</span>
-              </p>
-              <p>
-                Receiver:{" "}
+                Sent on:{" "}
                 <span className="font-semibold">
-                  {result.receiver_name} ({result.receiver_phone})
+                  {new Date(result.created_at).toLocaleString("en-KE")}
                 </span>
               </p>
-              {result.weight_kg ? (
-                <p>
-                  Weight: <span className="font-semibold">{result.weight_kg}kg</span>
-                </p>
-              ) : null}
               <p>
-                Fare: <span className="font-semibold">{formatKes(result.fare_amount)}</span>
+                Last update:{" "}
+                <span className="font-semibold">
+                  {new Date(result.updated_at).toLocaleString("en-KE")}
+                </span>
               </p>
               <p>
                 Payment status:{" "}
