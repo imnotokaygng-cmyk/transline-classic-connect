@@ -14,7 +14,7 @@ export const siteConfig = {
   /** URL of the existing staff / admin portal. */
   staffPortalUrl: env["VITE_STAFF_PORTAL_URL"] ?? "https://transline-classic.lovable.app/auth",
   /** Public base URL of this deployed website (used for M-PESA callbacks). */
-  publicUrl: env["VITE_PUBLIC_URL"] ?? "https://transline-classic.vercel.app",
+  publicUrl: env["VITE_PUBLIC_URL"] ?? "https://transline-classic-connect.vercel.app",
   headOffice: "Accra Road, Nairobi CBD, Kenya",
 } as const;
 
