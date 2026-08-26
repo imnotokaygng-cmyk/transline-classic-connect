@@ -32,6 +32,7 @@ export const initiateMpesaPayment = createServerFn({ method: "POST" })
     // Vercel production deployment URL (or override via MPESA_CALLBACK_URL).
     const callbackUrl =
       process.env["MPESA_CALLBACK_URL"] ??
+      (process.env["VERCEL_URL"] ? `https://${process.env["VERCEL_URL"]}` : null) ??
       process.env["VITE_PUBLIC_URL"] ??
       "https://transline-classic.vercel.app/api/public/mpesa/callback";
     const base =
