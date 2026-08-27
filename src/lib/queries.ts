@@ -127,13 +127,22 @@ export function tripsQuery(params: { originBranchId?: string; destination?: stri
   return queryOptions({
     queryKey: ["trips", params],
     queryFn: () => fetchTrips(params),
+    refetchInterval: 20000,
+    refetchOnWindowFocus: true,
   });
 }
 
 export const upcomingTripsQuery = queryOptions({
   queryKey: ["trips", "all-upcoming"],
   queryFn: () => fetchTrips({}),
+  refetchInterval: 30000,
 });
+
+/** Clerk and public apps sometimes store "1" vs "01" — compare on a common form. */
+export function normalizeSeat(seat: string): string {
+  const trimmed = String(seat).trim();
+  return /^\d+$/.test(trimmed) ? String(Number(trimmed)).padStart(2, "0") : trimmed;
+}
 
 export function takenSeatsQuery(tripId: string) {
   return queryOptions({
@@ -141,8 +150,9 @@ export function takenSeatsQuery(tripId: string) {
     queryFn: async (): Promise<string[]> => {
       const { data, error } = await supabase.rpc("get_taken_seats", { _trip_id: tripId });
       if (error) fail("We could not check seat availability. Please try again.", error);
-      return (data ?? []).map((row: { seat_number: string }) => row.seat_number);
+      return (data ?? []).map((row: { seat_number: string }) => normalizeSeat(row.seat_number));
     },
-    refetchInterval: 15000,
+    refetchInterval: 10000,
+    refetchOnWindowFocus: true,
   });
 }

@@ -162,8 +162,11 @@ function BookPage() {
           setPaymentState("paid");
           setStep("done");
           clearInterval(timer);
+          void queryClient.invalidateQueries({ queryKey: ["taken-seats"] });
+          void queryClient.invalidateQueries({ queryKey: ["trips"] });
           return;
         }
+
       } catch {
         /* keep polling */
       }
@@ -176,7 +179,7 @@ function BookPage() {
       }
     }, 3000);
     return () => clearInterval(timer);
-  }, [paymentState, booking]);
+  }, [paymentState, booking, queryClient]);
 
   const availableCount = trip ? trip.capacity - (takenSeats.data?.length ?? 0) : 0;
 
