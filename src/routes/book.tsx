@@ -179,7 +179,7 @@ function BookPage() {
       }
     }, 3000);
     return () => clearInterval(timer);
-  }, [paymentState, booking]);
+  }, [paymentState, booking, queryClient]);
 
   const availableCount = trip ? trip.capacity - (takenSeats.data?.length ?? 0) : 0;
 
