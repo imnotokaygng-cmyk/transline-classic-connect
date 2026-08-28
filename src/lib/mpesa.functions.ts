@@ -117,9 +117,12 @@ export const initiateMpesaPayment = createServerFn({ method: "POST" })
         return {
           ok: false as const,
           code: "STK_FAILED",
-          message: "We could not send the M-PESA prompt. Please try again in a moment.",
+          message:
+            stkJson.errorMessage ??
+            "We could not send the M-PESA prompt. Please try again in a moment.",
         };
       }
+
 
       await supabaseAdmin.from("payments").insert({
         reference_type: "booking",
