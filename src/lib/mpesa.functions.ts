@@ -30,11 +30,16 @@ export const initiateMpesaPayment = createServerFn({ method: "POST" })
     const passkey = process.env["MPESA_PASSKEY"];
     const shortcode = process.env["MPESA_SHORTCODE"];
     // Vercel production deployment URL (or override via MPESA_CALLBACK_URL).
-    const callbackUrl =
+    const callbackPath = "/api/public/mpesa/callback";
+    const withPath = (origin: string) =>
+      origin.includes(callbackPath) ? origin : `${origin.replace(/\/$/, "")}${callbackPath}`;
+    const callbackUrl = withPath(
       process.env["MPESA_CALLBACK_URL"] ??
-      (process.env["VERCEL_URL"] ? `https://${process.env["VERCEL_URL"]}` : null) ??
-      process.env["VITE_PUBLIC_URL"] ??
-      "https://transline-classic-connect.vercel.app/api/public/mpesa/callback";
+        (process.env["VERCEL_URL"] ? `https://${process.env["VERCEL_URL"]}` : null) ??
+        process.env["VITE_PUBLIC_URL"] ??
+        "https://transline-classic-connect.vercel.app",
+    );
+
     const base =
       (process.env["MPESA_ENV"] ?? "sandbox") === "production"
         ? "https://api.safaricom.co.ke"
