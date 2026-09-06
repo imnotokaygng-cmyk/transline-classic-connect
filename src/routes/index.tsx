@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bus, Package, MapPin, PhoneCall, ShieldCheck, Clock3, Ticket } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig, whatsappLink } from "@/config/site";
 
 export const Route = createFileRoute("/")({
@@ -29,25 +27,25 @@ const QUICK_ACTIONS = [
     to: "/book" as const,
     icon: Ticket,
     title: "Book a Ticket",
-    description: "Pick your route, choose your seat and pay instantly with M-PESA.",
+    description: "Instant seat reservation for all major Kenyan routes.",
   },
   {
     to: "/parcel" as const,
     icon: Package,
     title: "Send a Parcel",
-    description: "Drop off at any branch or arrange delivery across our network.",
+    description: "Door-to-door and station-to-station delivery services.",
   },
   {
     to: "/track-booking" as const,
     icon: Bus,
-    title: "Track a Booking",
-    description: "Look up your ticket using your booking reference.",
+    title: "Track Booking",
+    description: "Verify your trip details and scheduled departure time.",
   },
   {
     to: "/track-parcel" as const,
     icon: MapPin,
-    title: "Track a Parcel",
-    description: "Follow your parcel from origin to destination in real time.",
+    title: "Track Parcel",
+    description: "Real-time logistics monitoring for your peace of mind.",
   },
 ];
 
@@ -55,110 +53,134 @@ const TRUST_POINTS = [
   {
     icon: ShieldCheck,
     title: "Live seat availability",
-    description: "The same seat map our branch staff use — no double bookings, ever.",
+    description:
+      "Pick your favorite window seat or travel with friends by seeing exactly what's left on the bus.",
   },
   {
     icon: Clock3,
-    title: "Instant confirmation",
-    description: "Pay with M-PESA and get your booking reference immediately.",
+    title: "Instant M-PESA confirmation",
+    description: "Pay securely via mobile money and receive your booking reference in seconds.",
   },
   {
     icon: PhoneCall,
-    title: "Real support",
-    description: "Reach our team by phone or WhatsApp for anything you need.",
+    title: "Real support agents",
+    description: "No bots. Talk to our Kenyan customer care team via phone or WhatsApp.",
   },
 ];
 
 function Index() {
   return (
     <SiteLayout>
-      <section className="border-b border-border bg-secondary/60">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
-          <div className="space-y-6">
-            <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-              {siteConfig.tagline}
-            </span>
-            <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Book your seat. Send your parcel. Travel with confidence.
-            </h1>
-            <p className="max-w-lg text-base text-muted-foreground">
-              {siteConfig.name} connects you across Kenya with real-time seat availability,
-              secure M-PESA payments, and reliable parcel delivery — all in one place.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="h-12">
-                <Link to="/book">
-                  <Ticket className="mr-2 h-5 w-5" /> Book a Ticket
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="h-12">
-                <Link to="/parcel">
-                  <Package className="mr-2 h-5 w-5" /> Send a Parcel
-                </Link>
-              </Button>
-            </div>
-          </div>
+      {/* Full-bleed hero */}
+      <section className="relative flex min-h-[88vh] flex-col overflow-hidden">
+        <div className="absolute inset-0">
           <img
             src="/IMG-20260817-WA0019.jpg"
             alt="Transline Classic bus and delivery truck on the highway"
-            className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
+            className="h-full w-full object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
+        </div>
+
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-grow flex-col justify-center px-4 pb-24 pt-28">
+          <div className="max-w-3xl animate-in fade-in slide-in-from-bottom-6 duration-700">
+            <div className="mb-8 inline-flex -skew-x-10 items-center gap-2 bg-primary px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground">
+              <span className="skew-x-10">{siteConfig.tagline}</span>
+            </div>
+            <h1 className="mb-10 font-display text-6xl uppercase leading-[0.9] tracking-wide text-foreground sm:text-7xl md:text-8xl">
+              Book your seat.
+              <br />
+              <span className="text-primary [text-shadow:2px_2px_0_var(--foreground)]">
+                Send your parcel.
+              </span>
+              <br />
+              Travel with confidence.
+            </h1>
+            <div className="flex flex-wrap gap-5">
+              <Link
+                to="/book"
+                className="inline-flex items-center justify-center bg-foreground px-10 py-5 text-lg font-bold uppercase tracking-tight text-primary shadow-xl transition-all duration-300 hover:bg-primary hover:text-foreground"
+              >
+                Book a Ticket
+              </Link>
+              <Link
+                to="/parcel"
+                className="inline-flex items-center justify-center border-2 border-foreground px-10 py-5 text-lg font-bold uppercase tracking-tight text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+              >
+                Send a Parcel
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-16">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {QUICK_ACTIONS.map((action) => (
-            <Link key={action.to} to={action.to} className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="flex h-full flex-col gap-3 p-5">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <action.icon className="h-5 w-5" />
-                  </span>
-                  <p className="font-display text-base font-bold">{action.title}</p>
-                  <p className="text-sm text-muted-foreground">{action.description}</p>
-                </CardContent>
-              </Card>
+      {/* Quick actions — overlapping grid */}
+      <section className="relative z-20 mx-auto -mt-12 w-full max-w-6xl px-4 pb-24">
+        <div className="grid grid-cols-1 gap-0 border border-border bg-card shadow-2xl sm:grid-cols-2 lg:grid-cols-4">
+          {QUICK_ACTIONS.map((action, i) => (
+            <Link
+              key={action.to}
+              to={action.to}
+              className={
+                "group border-border p-8 transition-colors hover:bg-background sm:p-10 " +
+                (i < QUICK_ACTIONS.length - 1 ? "border-b sm:border-b-0 sm:border-r " : "") +
+                (i === 1 ? "lg:border-r" : "")
+              }
+            >
+              <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <action.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mb-3 font-display text-3xl uppercase tracking-wide">{action.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{action.description}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-16">
-        <div className="grid gap-8 sm:grid-cols-3">
+      {/* Trust points */}
+      <section className="mx-auto w-full max-w-6xl px-4 py-8">
+        <div className="flex flex-col justify-between gap-12 md:flex-row md:gap-16">
           {TRUST_POINTS.map((point) => (
-            <div key={point.title} className="space-y-2 text-center sm:text-left">
-              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary sm:mx-0">
-                <point.icon className="h-5 w-5" />
-              </span>
-              <p className="font-display text-base font-bold">{point.title}</p>
-              <p className="text-sm text-muted-foreground">{point.description}</p>
+            <div key={point.title} className="flex-1">
+              <h4 className="mb-3 border-l-4 border-primary pl-4 font-display text-2xl uppercase tracking-wide">
+                {point.title}
+              </h4>
+              <p className="pl-5 text-sm text-muted-foreground">{point.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="border-t border-border bg-secondary/60">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-4 py-14 text-center">
-          <h2 className="font-display text-2xl font-bold tracking-tight">Need help right now?</h2>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Our team is on hand to help you book, reschedule or track a parcel.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button asChild variant="outline" className="h-11">
-              <a href={`tel:${siteConfig.supportPhone.replace(/\s/g, "")}`}>
-                <PhoneCall className="mr-2 h-4 w-4" /> {siteConfig.supportPhone}
-              </a>
-            </Button>
-            <Button asChild className="h-11">
-              <a
-                href={whatsappLink("Hi Transline Classic, I need help with a booking.")}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Chat on WhatsApp
-              </a>
-            </Button>
+      {/* Help CTA band */}
+      <section className="mt-16 w-full bg-foreground py-12">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-6 px-4 md:flex-row">
+          <div className="flex items-center gap-6 text-center md:text-left">
+            <div className="hidden h-12 w-12 items-center justify-center rounded-full bg-background/10 text-primary md:flex">
+              <PhoneCall className="h-6 w-6" />
+            </div>
+            <p className="text-xl font-medium tracking-tight text-background">
+              Have a question or need a manual booking?
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-8">
+            <a
+              href={`tel:${siteConfig.supportPhone.replace(/\s/g, "")}`}
+              className="group flex items-center gap-2"
+            >
+              <span className="border-b border-transparent text-lg font-bold text-primary transition-all group-hover:border-primary">
+                {siteConfig.supportPhone}
+              </span>
+            </a>
+            <a
+              href={whatsappLink("Hi Transline Classic, I need help with a booking.")}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-2"
+            >
+              <span className="border-b border-transparent text-lg font-bold text-primary transition-all group-hover:border-primary">
+                WhatsApp Chat
+              </span>
+            </a>
           </div>
         </div>
       </section>
