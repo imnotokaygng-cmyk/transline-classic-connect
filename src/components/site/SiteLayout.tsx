@@ -43,8 +43,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <Link
                 key={item.to}
                 to={item.to}
-                activeProps={{ className: "text-primary" }}
-                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+                activeProps={{ className: "text-foreground underline decoration-primary decoration-4 underline-offset-8" }}
+                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
               >
                 {item.label}
               </Link>
@@ -71,7 +71,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                activeProps={{ className: "text-primary" }}
+                activeProps={{ className: "underline decoration-primary decoration-4 underline-offset-8" }}
                 className="block border-b border-border/60 py-3 text-base font-medium"
               >
                 {item.label}
