@@ -71,7 +71,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                activeProps={{ className: "text-primary" }}
+                activeProps={{ className: "underline decoration-primary decoration-4 underline-offset-8" }}
                 className="block border-b border-border/60 py-3 text-base font-medium"
               >
                 {item.label}
